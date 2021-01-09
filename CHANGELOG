@@ -1,0 +1,50 @@
+Version 1.2.0
+==================================================
+- Add new support system in help dialog
+
+Version 1.1.1
+==================================================
+- Improve page speed / Optimize cache settings
+
+Version 1.1.0
+==================================================
+- Change app icon
+
+Version 1.0.4
+==================================================
+- Add new marketing elements
+
+Version 1.0.3
+==================================================
+- PHP 7+ fix when array is empty
+
+Version 1.0.2
+==================================================
+- Change app-icon
+
+Version 0.9.0.4
+==================================================
+- Add post setup popup
+
+Version 0.9.0.3
+==================================================
+- Add special offer notice
+
+Version 0.9.0.2
+==================================================
+- Change block set to "navigation"
+- Add Custom Templates for Auto Nav + Page List
+- Add an "Review Offer" alert box
+- Replacing all Core::make() calls
+- Add missing support for PHP 5.3
+- Fixing legacy compatiblity
+- Adding alpha support to color pickers
+- Updating marketplace page
+
+Version 0.9.0.1
+==================================================
+- Replacing deprecated Core::make calls()
+
+Version 0.9.0.0
+==================================================
+- Submitted to PRB

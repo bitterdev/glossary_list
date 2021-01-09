@@ -1,0 +1,15 @@
+{
+  "title": "Glossary List",
+  "supportHostedOffsite": true,
+  "supportHostedOffsiteUrl": "https://www.bitter.de/support",
+  "singlePrice": 35,
+  "skillLevel": "Beginner",
+  "keywords": "fabianbitter, ui, component, glossar, glossary, glossary list, agenda, menu, addon, component, a-z, az, za, z-a, alphabetic, alphabetically, sort, order, jump, custom template, block, block element, template, custom, menü, alphabetisch, alphabetisches, design, style, element, glosar, glosary",
+  "shortDescription": "Block Element for displaying a glossary.",
+  "categories": [50],
+  "supportPlan": 12,
+  "screenshots": [
+    "https://static.bitter.de:9000/public/4716/1020/3307/1.jpg",
+    "https://static.bitter.de:9000/public/2616/1020/3307/2.jpg"
+  ]
+}
