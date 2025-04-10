@@ -1,0 +1,3 @@
+# Glossary List 
+
+The Glossary List add-on for Concrete CMS allows you to display pages in an alphabetically grouped list, sorted by their titles. At the top of the list, an A–Z navigation bar appears, showing only the letters corresponding to existing entries. When a user clicks on a letter, the page automatically scrolls to the relevant section. This makes it perfect for glossaries, directories, team listings, product indexes, or any content that benefits from alphabetical organization. The add-on is fully responsive and offers a smooth user experience on both desktop and mobile devices.

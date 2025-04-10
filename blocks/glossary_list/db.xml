@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema version="0.3">
+    <table name="btGlossaryList">
+        <field name="bID" type="I">
+            <unsigned/>
+            <key/>
+        </field>
+        <field name="rootPageId" type="I">
+            <unsigned/>
+        </field>
+        <field name="itemColor" type="C" length="40"/>
+        <field name="headlineColor" type="C" length="40"/>
+        <field name="navItemColor" type="C" length="40"/>
+        <field name="navItemColorHover" type="C" length="40"/>
+    </table>
+</schema>
