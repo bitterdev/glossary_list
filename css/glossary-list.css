@@ -1,45 +1,42 @@
-
-
 .glossary-list {
     display: block;
-    float: left;
     width: 100%;
-    clear: both;
     margin-bottom: 15px;
 }
 
 .glossary-list .glossary-agenda {
     display: block;
-    float: left;
     width: 100%;
 }
 
 .glossary-list .glossary-agenda ul {
     display: block;
-    float: left;
     width: 100%;
-    margin: 0;
     padding: 0;
     list-style: none;
-    margin-left: -5px;
+    margin: 0 0 1rem -5px;
 }
 
 .glossary-list .glossary-agenda ul li {
-    display: block;
-    float: left;
+    display: inline-block;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
+.glossary-list .glossary-agenda ul li a:hover {
+    color: #ffffff;
+    background-color: var(--bs-primary);
+}
+
 .glossary-list .glossary-agenda ul li a {
-    display: block;
-    float: left;
+    display: inline-block;
     text-decoration: none;
     height: 28px;
     line-height: 28px;
     width: 28px;
-    border: 1px solid transparent;
+    color: var(--bs-primary);
+    border: 1px solid var(--bs-primary);
     text-align: center;
     margin-left: 5px;
     margin-bottom: 5px;
@@ -47,36 +44,32 @@
 
 .glossary-list .glossary-items {
     display: block;
-    float: left;
     width: 100%;
 }
 
 .glossary-list .glossary-items .glossary-group {
     display: block;
-    float: left;
     width: 100%;
 }
 
 .glossary-list .glossary-items .glossary-group h2 {
     display: block;
-    float: left;
     width: 100%;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid var(--bs-body-color);
     padding-bottom: 3px;
 }
 
 .glossary-list .glossary-items .glossary-group ul {
     display: block;
-    float: left;
     width: 100%;
     margin: 0;
     padding: 0;
     list-style: none;
+    margin-bottom: 1rem;
 }
 
 .glossary-list .glossary-items .glossary-group ul li {
     display: block;
-    float: left;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -85,6 +78,5 @@
 
 .glossary-list .glossary-items .glossary-group ul li a {
     display: block;
-    float: left;
     text-decoration: none;
 }

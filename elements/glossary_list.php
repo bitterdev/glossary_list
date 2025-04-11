@@ -1,25 +1,65 @@
 <?php
 
-defined('C5_EXECUTE') or die("Access Denied.");
+defined('C5_EXECUTE') or die('Access denied');
 
-asort($items);
+use Concrete\Core\View\View;
 
-$groupedItems = array();
+/** @var array $items */
 
-foreach($items as $itemUrl => $itemName) {
-    $firstLetter = strtoupper(mb_substr($itemName, 0, 1, 'utf-8'));
+$items = $items ?? [];
 
-    $groupedItems[$firstLetter][$itemUrl] = $itemName;
+$groupedItems = [];
+
+if (count($items) > 0) {
+    asort($items);
+
+    foreach ($items as $itemUrl => $itemName) {
+        $firstLetter = strtoupper(mb_substr($itemName, 0, 1, 'utf-8'));
+
+        $groupedItems[$firstLetter][$itemUrl] = $itemName;
+    }
 }
 
-$viewOptions = array();
+View::getInstance()->requireAsset("glossary-list");
+?>
 
-$viewOptions["packageHandle"] = "glossary_list";
-$viewOptions["blockHandle"] = "glossary_list";
-$viewOptions["blockParams"]["groupedItems"] = $groupedItems;
-$viewOptions["blockParams"]["itemColor"] = "inherit";
-$viewOptions["blockParams"]["navItemColorHover"] = "inherit";
-$viewOptions["blockParams"]["navItemColor"] = "inherit";
-$viewOptions["blockParams"]["headlineColor"] = "inherit";
+<?php if (count($groupedItems) === 0) { ?>
+    <p>
+        <?php echo t("No items available."); ?>
+    </p>
+<?php } else { ?>
+    <div class="glossary-list">
+        <div class="glossary-agenda">
+            <ul>
+                <?php foreach ($groupedItems as $firstLetter => $items) { ?>
+                    <li>
+                        <a href="javascript:void(0);" data-first-letter="<?php echo $firstLetter; ?>">
+                            <?php echo $firstLetter; ?>
+                        </a>
+                    </li>
+                <?php } ?>
+            </ul>
+        </div>
 
-View::element('/generic_block', $viewOptions, 'glossary_list');
+        <div class="glossary-items">
+            <?php foreach ($groupedItems as $firstLetter => $items) { ?>
+                <div class="glossary-group" data-first-letter="<?php echo $firstLetter; ?>">
+                    <h2>
+                        <?php echo $firstLetter; ?>
+                    </h2>
+
+                    <ul>
+                        <?php foreach ($items as $itemUrl => $itemName) { ?>
+
+                            <li>
+                                <a href="<?php echo $itemUrl; ?>">
+                                    <?php echo $itemName; ?>
+                                </a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+<?php } ?>

@@ -3,8 +3,9 @@
 namespace Concrete\Package\GlossaryList\Block\GlossaryList;
 
 use Concrete\Core\Block\BlockController;
-use Concrete\Core\Support\Facade\Application;
-use Page;
+use Concrete\Core\Error\ErrorList\ErrorList;
+use Concrete\Core\Html\Service\Navigation;
+use Concrete\Core\Page\Page;
 
 class Controller extends BlockController
 {
@@ -21,61 +22,29 @@ class Controller extends BlockController
     protected $btCacheBlockOutputOnPost = true;
     protected $btCacheBlockOutputForRegisteredUsers = true;
 
-    public function getBlockTypeDescription()
+    public function getBlockTypeDescription(): string
     {
         return t("Block Element for displaying a glossary.");
     }
 
-    public function getBlockTypeName()
+    public function getBlockTypeName(): string
     {
         return t("Glossary List");
     }
 
-    public function on_start()
-    {
-        if (!$this->app instanceof \Concrete\Core\Application\Application) {
-            $this->app = Application::getFacadeApplication();
-        }
-
-        parent::on_start();
-    }
-
     public function view()
     {
-        $groupedItems = [];
-
         $items = $this->getGlossaryItems();
-
-        if (is_array($items) && count($items) > 0) {
-            asort($items);
-
-            foreach ($items as $itemUrl => $itemName) {
-                $firstLetter = strtoupper(mb_substr($itemName, 0, 1, 'utf-8'));
-
-                $groupedItems[$firstLetter][$itemUrl] = $itemName;
-            }
-        }
-
-        $this->set("groupedItems", $groupedItems);
-        $this->set("uniqueIdentifier", $this->app->make('helper/validation/identifier')->getString(18));
+        $this->set("items", $items);
     }
 
-    public function registerViewAssets($outputContent = '')
-    {
-        $this->requireAsset('javascript', 'jquery');
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getSearchableContent()
+    public function getSearchableContent(): string
     {
         $items = $this->getGlossaryItems();
 
         $content = "";
 
-        if (is_array($items) && count($items) > 0) {
+        if (count($items) > 0) {
             foreach ($items as $item) {
                 $content .= " " . $item;
             }
@@ -86,76 +55,37 @@ class Controller extends BlockController
 
     public function add()
     {
-        $this->initDefaults();
-        $this->addOrEdit();
+        $this->set("rootPageId", null);
     }
 
-    public function edit()
+    public function validate($args): ErrorList
     {
-        $this->addOrEdit();
-    }
+        $errorList = new ErrorList();
 
-    /**
-     * @param array $args
-     * @return mixed
-     */
-    public function validate($args)
-    {
-        self::on_start();
-
-        $errorHelper = $this->app->make('helper/validation/error');
-
-        if (intval($args["rootPageId"]) === 0 || is_object(Page::getById($args["rootPageId"])) === false) {
-            $errorHelper->add(t("The field %s is invalid.", t("Root Page")));
+        if (empty($args["rootPageId"])) {
+            $errorList->add(t("You need to enter a valid page."));
         }
 
-        $colors = [
-            "itemColor" => t("Item Color"),
-            "headlineColor" => t("Headline Color"),
-            "navItemColor" => t("Navigation Item Color"),
-            "navItemColorHover" => t("Navigation Item Color (Hover)")
-        ];
-
-        foreach ($colors as $varName => $label) {
-            if (!isset($args[$varName]) || $args[$varName] == "") {
-                $errorHelper->add(t("The field %s is invalid.", $label));
-            }
-        }
-
-        return $errorHelper;
+        return $errorList;
     }
 
-    /**
-     * @return array
-     */
-    private function getGlossaryItems()
+    private function getGlossaryItems(): array
     {
-        $navHelper = $this->app->make('helper/navigation');
+        /** @var Navigation $navHelper */
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $navHelper = $this->app->make(Navigation::class);
 
         $items = [];
 
-        $rootPage = Page::getById($this->rootPageId);
+        $rootPage = Page::getById($this->get("rootPageId"));
 
-        if (is_object($rootPage)) {
+        if ($rootPage instanceof Page && !$rootPage->isError()) {
             foreach ($rootPage->getCollectionChildren() as $childPage) {
-                $items[$navHelper::getLinkToCollection($childPage)] = $childPage->getCollectionName();
+                /** @noinspection PhpParamsInspection */
+                $items[$navHelper->getLinkToCollection($childPage)] = $childPage->getCollectionName();
             }
         }
 
         return $items;
     }
-
-    private function initDefaults()
-    {
-        $this->set("itemColor", "#000000");
-        $this->set("headlineColor", "#000000");
-        $this->set("navItemColor", "#000000");
-        $this->set("navItemColorHover", "#75ca20");
-    }
-
-    private function addOrEdit()
-    {
-        $this->set("app", $this->app);
-    }
-
 }

@@ -2,9 +2,13 @@
 
 defined('C5_EXECUTE') or die('Access denied');
 
+use Concrete\Block\Autonav\Controller;
+use Concrete\Core\View\View;
+
+/** @var Controller $controller */
 $navItems = $controller->getNavItems(true);
 
-$items = array();
+$items = [];
 
 if (count($navItems) > 0) {
     foreach ($navItems as $ni) {
@@ -12,4 +16,5 @@ if (count($navItems) > 0) {
     }
 }
 
-View::element("/glossary_list", ["items" => $items], "glossary_list");
+/** @noinspection PhpUnhandledExceptionInspection */
+View::element("glossary_list", ["items" => $items], "glossary_list");
