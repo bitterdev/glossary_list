@@ -1,5 +1,10 @@
 {
   "name": "bitter/glossary_list",
   "type": "concrete5-package",
-  "description": "Create an alphabetical, scrollable list of pages grouped and sorted by title."
+  "description": "Create an alphabetical, scrollable list of pages grouped and sorted by title.",
+  "autoload": {
+    "psr-4": {
+      "Bitter\\GlossaryList\\": "src/Bitter/GlossaryList"
+    }
+  }
 }
