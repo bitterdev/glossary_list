@@ -1,0 +1,5 @@
+{
+  "name": "bitter/glossary_list",
+  "type": "concrete5-package",
+  "description": "Create an alphabetical, scrollable list of pages grouped and sorted by title."
+}
