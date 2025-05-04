@@ -21,6 +21,8 @@ $pageSelector = $app->make(PageSelector::class);
 /** @noinspection PhpUnhandledExceptionInspection */
 View::element("dashboard/help_blocktypes", [], "glossary_list");
 
+/** @noinspection PhpUnhandledExceptionInspection */
+View::element("dashboard/did_you_know", [], "glossary_list");
 ?>
 
 <div class="form-group">
